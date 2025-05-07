@@ -1,0 +1,78 @@
+def detect_fraud(transaction):
+    """
+    A very simple rule-based fraud detection function.
+
+    Args:
+        transaction (dict): A dictionary representing a credit card transaction
+                            with keys like 'amount', 'location', 'time', etc.
+
+    Returns:
+        bool: True if the transaction is flagged as potentially fraudulent,
+              False otherwise.
+    """
+    amount_threshold = 1000  # Flag transactions above this amount
+    unusual_locations = ["CountryX", "CountryY"]  # List of potentially high-risk locations
+    rapid_transaction_threshold_seconds = 60  # Flag multiple transactions within this timeframe (needs tracking of recent transactions)
+
+    if transaction['amount'] > amount_threshold:
+        print(f"Potential fraud: Transaction amount (${transaction['amount']}) exceeds threshold.")
+        return True
+
+    if transaction['location'] in unusual_locations:
+        print(f"Potential fraud: Transaction from an unusual location: {transaction['location']}.")
+        return True
+
+    # For rapid transaction detection, you'd need to maintain a history of recent
+    # transactions for each card and check timestamps. This is more complex
+    # and requires storing state, which isn't shown in this very simple example.
+    # Example (conceptual):
+    # if is_rapid_transaction(transaction['card_number'], transaction['time'], rapid_transaction_threshold_seconds):
+    #     print("Potential fraud: Multiple rapid transactions.")
+    #     return True
+
+    return False
+
+# Example transactions
+transaction1 = {'card_number': '1234-5678-9012-3456', 'amount': 1200, 'location': 'Coimbatore', 'time': '2025-05-07 15:25:00'}
+transaction2 = {'card_number': '9876-5432-1098-7654', 'amount': 500, 'location': 'CountryX', 'time': '2025-05-07 15:26:00'}
+transaction3 = {'card_number': '1234-5678-9012-3456', 'amount': 50, 'location': 'Coimbatore', 'time': '2025-05-07 15:27:00'}
+
+# Detect potential fraud
+if detect_fraud(transaction1):
+    print("Transaction 1 flagged as potentially fraudulent.")
+else:
+    print("Transaction 1 appears normal.")
+
+if detect_fraud(transaction2):
+    print("Transaction 2 flagged as potentially fraudulent.")
+else:
+    print("Transaction 2 appears normal.")
+
+if detect_fraud(transaction3):
+    print("Transaction 3 flagged as potentially fraudulent.")
+else:
+    print("Transaction 3 appears normal.")
+
+# --- Simple Prevention Concepts ---
+
+print("\n--- Simple Credit Card Fraud Prevention Concepts ---")
+
+print("\n1. *Be Vigilant with Your Card:*")
+print("   - Keep your card in a secure place.")
+print("   - Never share your PIN or CVV with anyone.")
+print("   - Be cautious when using your card in public places; shield the keypad.")
+
+print("\n2. *Monitor Your Transactions:*")
+print("   - Regularly check your credit card statements for any unfamiliar transactions.")
+print("   - Sign up for SMS or email alerts for transactions to get real-time notifications.")
+
+print("\n3. *Secure Online Practices:*")
+print("   - Only make online purchases on secure websites (look for 'https://' and a padlock icon).")
+print("   - Be wary of suspicious emails or links asking for your credit card details (phishing).")
+print("   - Use strong, unique passwords for your online accounts.")
+
+print("\n4. *Shred Important Documents:*")
+print("   - Shred old credit card statements and expired cards before discarding them.")
+
+print("\n5. *Report Issues Immediately:*")
+print("   - If your card is lost or stolen, or if you notice any unauthorized transactions, report it to your bank immediately.")
